@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Default tokens = CareerNiche brand, light (ThemeContext overrides per user). */
+:root {
+  --primary: 118 188 33; --primary-fg: 17 17 17; --primary-soft: 238 247 227; --accent: 56 85 16;
+  --bg: 248 249 246; --surface: 255 255 255; --surface-2: 243 246 239;
+  --ink: 22 26 20; --ink-muted: 92 101 88; --ink-faint: 150 158 146; --line: 229 232 225;
+  color-scheme: light;
+}
+.dark { color-scheme: dark; }
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 { letter-spacing: -0.015em; }
+  ::selection { background: rgb(var(--primary) / 0.25); }
+  *:focus-visible { outline: none; }
+  a, button, [role="button"] { -webkit-tap-highlight-color: transparent; }
+  /* Single-column grids shouldn't grow to fit long text (lets `truncate` work on mobile) */
+  .grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8; }
+  .eyebrow { @apply text-xs font-bold uppercase tracking-[0.14em] text-primary; }
+  .link { @apply font-semibold text-primary hover:underline underline-offset-4; }
+  .scrollbar-thin::-webkit-scrollbar { height: 8px; width: 8px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: rgb(var(--line)); border-radius: 999px; }
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
